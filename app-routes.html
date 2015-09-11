@@ -1,23 +1,27 @@
 <link rel="import" href="../polymer/polymer.html">
-<dom-module id="app-routes">
-  <style>
-    :host {
-      display: none;
-    }
-  </style>
-  <template>
 
-    <div id="routes" on-route="on_route">
-      <content></content>
-    </div>
+<dom-module id="app-routes">
+  <template>
+    <style>
+      :host {
+        display: none;
+      }
+    </style>
+
+    <content></content>
 
   </template>
 </dom-module>
+
 <script src="../page/page.js"></script>
 <script>
   Polymer({
 
     is: 'app-routes',
+
+    listeners: {
+      'route': 'on_route'
+    },
 
     attached: function () {
       this.async(function () {
@@ -25,12 +29,8 @@
       });
     },
 
-    on_link: function (event) {
-      page.show(event.detail);
-    },
-
-    on_route: function (event, detail) {
-      var page_name = detail.page_name;
+    on_route: function (event) {
+      var page_name = event.detail.page_name;
       this.open_page(page_name, detail);
     },
 
