@@ -14,6 +14,7 @@
 </dom-module>
 
 <script src="../page/page.js"></script>
+<script src="query.js"></script>
 <script>
   Polymer({
 
@@ -36,6 +37,7 @@
 
     open_page: function (page_name, route) {
       var element = document.createElement(page_name);
+      route.query = qs.parse(route.querystring);
       element.route = route;
       this.fire('iron-signal', { name: 'page', data: element });
     }
